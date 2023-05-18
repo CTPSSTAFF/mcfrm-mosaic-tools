@@ -36,7 +36,5 @@ in ArcMap or ArcGIS Pro. Converting it into an ESRI "toolbox" tool
 is left as an exercise for the reader.
 
 ## Colophon
-Author: Ben Krepp
+Author: Ben Krepp  
 Date: 18 May 2023
-
-
