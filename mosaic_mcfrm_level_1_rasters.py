@@ -57,21 +57,6 @@ def mylog(s):
     # print(s)
     arcpy.AddMessage(s)
 #
-
-# Return a list of the fully-qualified paths to the TIF files
-# listed in the file <folder>/tif_file_list.txt'.
-def get_list_of_fq_paths_to_tifs(folder):
-    pass
-    # Parameter 'folder' : fully-qualified path to folder containing a 'tif_file_list.txt' file
-    in_fn = folder + '/tif_file_list.txt'
-    input = open(in_fn, 'r')
-    inlines = input.readlines()
-    input.close()
-    # Strip trailing newlines from input
-    inlines = [ line.strip() for line in inlines]
-    fq_tif_list = [ folder + '/' + line for line in inlines]
-    return fq_tif_list
-#
     
 # Add all the individual TIF rastesrs of the kind 'data_kind' for the year indicated by 'year_folder'
 # to the mosaic data set indicated by 'mosaic_full_path'.
