@@ -19,16 +19,16 @@ LEVEL_1/
 
 ## Purpose
 The purpose of this tool is to create a single raster mosaic for 
-each \{year, kind-of-data\} from all the relevant TIFs.
+each \{year, data\_kind\} pair from all the relevant TIFs.
 
-## Pre-requisite
-This tool relies upon the existence of a file named tif\_file\_list.txt
-in each directory containing the raw TIF data. These were created by
-running the command:
-```
-    ls *.tif > tif_file_list.txt
-```
-in a 'bash' shell in each such directory.
+## Inputs
+Individual raster TIF files, one per town covered by the MC-FRM data, for each:
+\{year, data_kind\} pair, where _year_ may be 'Present', '2030', '2050, or '2070',
+and _data\_kind_ may be 'Probability', 'Depth_1_percent', 'Depth_0.5_percent' or
+'Depth_0.1_percent'.
+
+## Outputs
+A single raster mosaic dataset in a File Geodatabase for each \{year, data_kind\} pair.
 
 ## Execution
 This script is inteneded to be run in the interactive Python console
@@ -37,4 +37,4 @@ is left as an exercise for the reader.
 
 ## Colophon
 Author: Ben Krepp  
-Date: 18 May 2023
+Date: 18 May 2023, 30 May 2023
