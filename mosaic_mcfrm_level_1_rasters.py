@@ -38,9 +38,10 @@
 # is left as an exercise for the reader.
 #
 # Author: Ben Krepp
-# Date: 18 May 2023
+# Date: 18 May 2023, 30 May 2023
 
 import arcpy
+import glob
 
 coordinate_system="PROJCS['NAD_1983_StatePlane_Massachusetts_Mainland_FIPS_2001',GEOGCS['GCS_North_American_1983',DATUM['D_North_American_1983',SPHEROID['GRS_1980',6378137.0,298.257222101]],PRIMEM['Greenwich',0.0],UNIT['Degree',0.0174532925199433]],PROJECTION['Lambert_Conformal_Conic'],PARAMETER['False_Easting',200000.0],PARAMETER['False_Northing',750000.0],PARAMETER['Central_Meridian',-71.5],PARAMETER['Standard_Parallel_1',41.71666666666667],PARAMETER['Standard_Parallel_2',42.68333333333333],PARAMETER['Latitude_Of_Origin',41.0],UNIT['Meter',1.0]];-36530900 -28803200 10000;-100000 10000;-100000 10000;0.001;0.001;0.001;IsHighPrecision"
 
@@ -78,8 +79,8 @@ def add_rasters_to_mosaic(year_folder, data_kind, mosaic_full_path):
     # Create semicolon-delimited list of TIFs to add to the mosaic
     north_folder = year_folder + 'North/' + data_kind + '/'
     south_folder = year_folder + 'South/' + data_kind + '/'
-    north_tif_list = get_list_of_fq_paths_to_tifs(north_folder)
-    south_tif_list = get_list_of_fq_paths_to_tifs(south_folder)
+    north_tif_list = glob.glob(north_folder + '*.tif')
+    south_tif_list = glob.glob(south_folder + '*.tif')
     full_tif_list = north_tif_list + south_tif_list
     #
     # Delimit with semicolons - don't append semicolon to last items
@@ -117,11 +118,14 @@ def add_rasters_to_mosaic(year_folder, data_kind, mosaic_full_path):
 #
 
 # Main driver logic
-def main_routine():
+# parameter 'all_subfolder_name' is the name of the subfolder to create
+#           immediately 'below' the root/<year> folder, at the same 
+#           levels as the 'North' and 'South' folders in the delivered data.
+def main_routine(all_subfolder_name='All'):
     for year in years:
         # Create 'All' subfolder
         year_folder = root + year + '/'
-        all_subfolder_name = "All"
+        # all_subfolder_name = "All"
         all_subfolder_path = year_folder + all_subfolder_name
         mylog('Creating folder: ' + all_subfolder_path)
         arcpy.CreateFolder_management(year_folder, all_subfolder_name)
